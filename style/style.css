@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+}
+
+.form {
+  width: 450px;
+  position: fixed;
+  top: 10%;  
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  transition: opacity .15s ease, visibility .15s ease;
+  z-index: 99;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.form.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bx.bx-x {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+body.lock {
+  overflow: hidden;
+}
+
+.backlock {
+  transition: opacity .15s ease, background-color .15s ease;
+}
+
+.backlock.active {
+  position: fixed;
+  opacity: .4;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+#buttonsContainer {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.sortStudents:first-child {
+  grid-area: 1 / 1 / 2 / 4;
+  order: 1;
+}
+
+.sortStudents:nth-child(2) {
+  grid-area: 1 / 5 / 2 / 7;
+  order: 2;
+}
+
+.sortStudents:nth-child(3) {
+  grid-area: 1 / 10 / 2 / 13;
+  order: 4;
+}
+
+.sortStudents:last-child {
+  grid-area: 1 / 7 / 2 / 10;
+  order: 3;
+}

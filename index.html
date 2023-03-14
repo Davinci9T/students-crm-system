@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>список студентов</title>
+  <link rel="stylesheet" href="style/reset.css" />
+  <link rel="stylesheet" href="style/style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body class="bg-slate-900">
+  <form id="add-student-form" class="bg-slate-700 form flex flex-col gap-y-3 text-gray-400 items-center justify-center p-12 rounded-xl">
+    <i class='text-4xl bx bx-x' id="close" style='color:#ffffff'></i>
+    <label class="w-full" for="surname">Фамилия: <br>
+      <input class="input w-full px-4 py-2 rounded-xl" type="text" id="surname" name="surname" required /></label>
+
+    <label class="w-full" for="firstname">Имя: <br>
+      <input class="input w-full px-4 py-2 rounded-xl" type="text" id="firstname" name="firstname" required /></label>
+
+    <label class="w-full" for="patronymic">Отчество: <br>
+      <input class="input w-full px-4 py-2 rounded-xl" type="text" id="patronymic" name="patronymic" required /></label>
+
+    <label class="w-full" for="age">Дата рождения: <br>
+      <input min="1900-01-01" max="2014-05-20" class="input w-full px-4 py-2 rounded-xl" type="date" id="age" name="age" required /></label>
+
+    <label class="w-full" for="startStud">Начало обучения: <br>
+      <input max="2022" min="2000" class="input w-full px-4 py-2 rounded-xl" type="number" id="startStud" name="startStud" required /></label>
+
+    <label class="w-full" for="department">Факультет: <br>
+      <input class="input w-full px-4 py-2 rounded-xl" type="text" id="department" name="department" required /></label>
+
+    <button class="w-full font-semibold text-gray-100 bg-blue-500 hover:bg-blue-600 rounded-xl px-4 py-2 pb-2.5" type="submit">Добавить студента</button>
+  </form>
+  <div class="backlock" id="backlock"></div>
+  <section class="main mb-12">
+    <div class="wrapper container mx-auto max-w-5xl px-4 pt-6 flex flex-col gap-y-6 items-center justify-center">
+
+      <form id="search-form" class="w-full flex gap-x-3">
+        <input class="w-full text-gray-600 input px-4 py-2 rounded-xl" placeholder="Найти..." type="text" id="search-input" name="search" />
+        <button id="search-btn" type="submit" class="font-bold text-gray-100 bg-slate-700 rounded-xl px-4 py-2 pb-2.5">Поиск</button>
+      </form>
+
+      <div class="w-full">
+        <div id="buttonsContainer" class="sort text-center gap-y-3 w-full bg-gray-800 rounded-xl px-10 py-2 mb-8">
+          <!-- кнопки сортировки -->
+        </div>
+        <div id="student-list" class="students w-full flex-col gap-y-3 flex justify-center">
+          <!-- список студентов -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <button class="font-bold text-gray-100 bg-gray-600 rounded-xl p-4 pb-2 pt-0.5 text-4xl ml-auto fixed bottom-9 right-9" id="openForm">+</button>
+</body>
+
+</html>
