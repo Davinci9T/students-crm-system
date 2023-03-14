@@ -1,6 +1,14 @@
-import { students, studentBuild, compareName, calculateAge, timeOfLear } from "./components.js"
+import {
+  students,
+  studentBuild,
+  compareName,
+  calculateAge,
+  timeOfLear,
+} from "./components.js"
 
-let arrStudents = localStorage.getItem("arrStudents") ? JSON.parse(localStorage.getItem("arrStudents")) : [...students];
+let arrStudents = localStorage.getItem("arrStudents")
+  ? JSON.parse(localStorage.getItem("arrStudents"))
+  : [...students]
 
 // перебераем существующий список
 studentBuild(arrStudents)
@@ -46,7 +54,8 @@ const renderStudents = (searchTerm = "") => {
           <li class="name text-gray-400 font-semibold col-start-1 col-span-3">${student.fio}</li>
           <li class="fac text-gray-400 font-semibold col-start-5 col-span-2">${student.department}</li>
           <li class="age text-gray-400 font-semibold col-span-3">${student.studentAge}</li>
-          <li class="course text-gray-400 font-semibold col-start-10 col-span-3">${student.course}</li>`
+          <li class="course text-gray-400 font-semibold col-start-10 col-span-3">${student.course}</li>
+          <button class="remove-student-btn bg-red-500 rounded-xl px-2 font-semibold text-gray-100" data-id=${student.id}>Удалить</button>`
     studentList.appendChild(row)
   })
 }
@@ -69,7 +78,7 @@ addStudentForm.addEventListener("submit", (event) => {
   const department = document.getElementById("department").value
   const student = { surname, firstname, patronymic, age, startStud, department }
 
-  arrStudents.push(student);
+  arrStudents.push(student)
   arrStudents.forEach((student, i) => {
     student.id = i + 1
     compareName(student)
@@ -78,7 +87,7 @@ addStudentForm.addEventListener("submit", (event) => {
     student.course = timeOfLear(arrStudents, i)
     return student
   })
-  localStorage.setItem("arrStudents", JSON.stringify(arrStudents));
+  localStorage.setItem("arrStudents", JSON.stringify(arrStudents))
   searchStudents()
   addStudentForm.reset()
   document.body.classList.remove("lock")
@@ -86,7 +95,17 @@ addStudentForm.addEventListener("submit", (event) => {
   addStudentForm.classList.remove("active")
 })
 
-
+document
+  .getElementById("student-list")
+  .addEventListener("click", async (event) => {
+    if (event.target.classList.contains("remove-student-btn")) {
+      const id = event.target.getAttribute("data-id")
+      const index = arrStudents.findIndex((student) => student.id == id)
+      arrStudents.splice(index, 1)
+      renderStudents()
+      localStorage.setItem("arrStudents", JSON.stringify(arrStudents))
+    }
+  })
 
 const searchStudents = () => {
   const searchTerm = document.getElementById("search-input").value
@@ -95,13 +114,12 @@ const searchStudents = () => {
 
 renderStudents()
 
-const studentSearchForm = document.getElementById("search-form");
-studentSearchForm.addEventListener('submit', (event) => {
-    event.preventDefault()
+const studentSearchForm = document.getElementById("search-form")
+studentSearchForm.addEventListener("submit", (event) => {
+  event.preventDefault()
   const searchTerm = document.getElementById("search-input").value
   renderStudents(searchTerm)
 })
-
 
 // СОРТИРОВКА ПО ПАРАМЕТРАМ + СОЗДАЁМ КНОКПИ СОРТИРОВКИ
 const sortStudents = (param) => {
@@ -126,12 +144,12 @@ const sortStudentsOfBirthday = () => {
   searchStudents()
 }
 // ==================================================================
-const sortTypes = ["fio", "department", "course"];
-const buttonsContainer = document.getElementById("buttonsContainer");
+const sortTypes = ["fio", "department", "course"]
+const buttonsContainer = document.getElementById("buttonsContainer")
 
 sortTypes.forEach((sortType, i) => {
-  const sortTypesTitle = ["ФИО", "Факультет", "Годы обучения"];
-  const button = document.createElement("button");
+  const sortTypesTitle = ["ФИО", "Факультет", "Годы обучения"]
+  const button = document.createElement("button")
 
   button.classList.add(
     "sortStudents",
@@ -147,11 +165,11 @@ sortTypes.forEach((sortType, i) => {
     "rounded-xl"
   )
   button.textContent = sortTypesTitle[i]
-  button.addEventListener("click", () => sortStudents(sortType));
-  buttonsContainer.appendChild(button);
-});
+  button.addEventListener("click", () => sortStudents(sortType))
+  buttonsContainer.appendChild(button)
+})
 
-const sortStudentsOfBirthdayBtn = document.createElement("button");
+const sortStudentsOfBirthdayBtn = document.createElement("button")
 sortStudentsOfBirthdayBtn.classList.add(
   "sortStudents",
   "text-lg",
@@ -166,8 +184,8 @@ sortStudentsOfBirthdayBtn.classList.add(
   "rounded-xl"
 )
 sortStudentsOfBirthdayBtn.textContent = "Возраст"
-buttonsContainer.appendChild(sortStudentsOfBirthdayBtn);
-sortStudentsOfBirthdayBtn.addEventListener('click', sortStudentsOfBirthday)
+buttonsContainer.appendChild(sortStudentsOfBirthdayBtn)
+sortStudentsOfBirthdayBtn.addEventListener("click", sortStudentsOfBirthday)
 
 // КНОПКИ +/x
 const openForm = document.getElementById("openForm")

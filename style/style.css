@@ -11,7 +11,7 @@ body {
 .form {
   width: 450px;
   position: fixed;
-  top: 10%;  
+  top: 10%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -73,4 +73,16 @@ body.lock {
 .sortStudents:last-child {
   grid-area: 1 / 7 / 2 / 10;
   order: 3;
+}
+
+.slot {
+  position: relative;
+  z-index: 10;
+}
+
+.remove-student-btn {
+  position: absolute;
+  height: inherit;
+  right: -95px;
+  z-index: -1;
 }
